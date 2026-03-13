@@ -1,0 +1,11 @@
+Description:
+    Ejects one or more JetUi components into your application so they can
+    be customised locally. The ejected files take precedence over the gem's
+    built-in versions, similar to how `rails generate devise:views` works.
+
+    Available components: btn, card
+
+Examples:
+    rails generate jet_ui:eject btn
+    rails generate jet_ui:eject card
+    rails generate jet_ui:eject btn card

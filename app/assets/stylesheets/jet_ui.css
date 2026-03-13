@@ -1,0 +1,18 @@
+/*
+ * JetUi component styles.
+ *
+ * Import this file in your application's CSS after your Tailwind CSS import,
+ * or import individual component stylesheets as needed.
+ *
+ * Example (using Tailwind CSS v4 with Vite or Propshaft):
+ *
+ *   @import "jet_ui/btn";
+ *   @import "jet_ui/card";
+ *
+ * Or import everything at once:
+ *
+ *   @import "jet_ui";
+ */
+
+@import "jet_ui/btn.css";
+@import "jet_ui/card.css";

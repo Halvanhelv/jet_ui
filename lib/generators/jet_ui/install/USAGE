@@ -1,0 +1,9 @@
+Description:
+    Sets up JetUi in your Rails application.
+
+    - Injects `@import "jet_ui"` into your CSS entrypoint
+    - Shows Tailwind CSS content configuration hints
+    - Prints usage examples
+
+Example:
+    rails generate jet_ui:install
