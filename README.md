@@ -17,141 +17,267 @@ Add to your Gemfile:
 gem "jet_ui"
 ```
 
-Run:
+Run the install generator:
 
 ```bash
 bundle install
+rails generate jet_ui:install
 ```
 
-Import the component stylesheets in your application CSS (after your Tailwind import):
+The generator injects a single import into your Tailwind CSS source file:
 
 ```css
-@import "jet_ui/btn";
-@import "jet_ui/card";
+@import "/path/to/gem/app/assets/stylesheets/jet_ui.css";
 ```
 
-Or import everything at once:
+This single file imports all component stylesheets automatically. When the gem is updated with new components, your app picks them up on the next CSS build — no manual changes needed.
 
-```css
-@import "jet_ui";
+## Usage
+
+The `jet_ui` helper is available in all views and gives you access to every component via a concise builder syntax:
+
+```erb
+<%= jet_ui.btn { "Save" } %>
+<%= jet_ui.card do %>...</% end %>
 ```
+
+Subcomponents follow the `namespace_subcomponent` naming convention:
+
+```erb
+<%= jet_ui.card_header do %>...</% end %>
+<%= jet_ui.alert_title { "Error" } %>
+<%= jet_ui.stat_label { "Revenue" } %>
+```
+
+---
 
 ## Components
 
-### BtnComponent
+### Btn
 
 A versatile button supporting multiple variants, sizes, and modifiers.
 
-**Variants:** `primary`, `secondary`, `danger`, `ghost`, `link`
-**Sizes:** `xs`, `sm`, `md` (default), `lg`, `xl`
+**Variants:** `default` (default), `outline`, `secondary`, `danger`, `ghost`, `link`
+**Sizes:** `xs`, `sm`, `md` (default), `lg`, `icon_xs`, `icon_sm`, `icon_md`, `icon_lg`
 
 ```erb
 <%# Default button %>
-<%= render JetUi::BtnComponent.new do %>
-  Button
-<% end %>
+<%= jet_ui.btn { "Save" } %>
 
-<%# Primary variant %>
-<%= render JetUi::BtnComponent.new(variant: :primary) do %>
-  Save
-<% end %>
+<%# Variants %>
+<%= jet_ui.btn variant: :outline do %>Cancel<% end %>
+<%= jet_ui.btn variant: :danger do %>Delete<% end %>
+<%= jet_ui.btn variant: :ghost do %>Ghost<% end %>
+<%= jet_ui.btn variant: :link do %>Link<% end %>
 
-<%# Render as a link (anchor tag) %>
-<%= render JetUi::BtnComponent.new(variant: :secondary, href: root_path) do %>
-  Go home
-<% end %>
+<%# Render as anchor %>
+<%= jet_ui.btn url: root_path do %>Go home<% end %>
 
-<%# Outlined modifier %>
-<%= render JetUi::BtnComponent.new(variant: :danger, outlined: true) do %>
-  Delete
-<% end %>
+<%# Sizes %>
+<%= jet_ui.btn size: :sm do %>Small<% end %>
+<%= jet_ui.btn size: :icon_md do %>★<% end %>
 
-<%# Size and shape modifiers %>
-<%= render JetUi::BtnComponent.new(variant: :primary, size: :lg, rounded: true) do %>
-  Large Rounded
-<% end %>
-
-<%# Full-width block button %>
-<%= render JetUi::BtnComponent.new(variant: :primary, block: true) do %>
-  Submit
-<% end %>
+<%# Modifiers %>
+<%= jet_ui.btn rounded: true do %>Pill<% end %>
+<%= jet_ui.btn circle: true, size: :icon_md do %>★<% end %>
+<%= jet_ui.btn block: true do %>Full width<% end %>
 ```
 
-**Parameters**
-
-| Parameter  | Type    | Default | Description                                      |
-|------------|---------|---------|--------------------------------------------------|
-| `variant`  | Symbol  | `nil`   | Color/style variant: primary, secondary, danger, ghost, link |
-| `href`     | String  | `nil`   | Renders an `<a>` tag when set                    |
-| `size`     | Symbol  | `:md`   | Size: xs, sm, md, lg, xl                         |
-| `rounded`  | Boolean | `false` | Full rounded pill shape                          |
-| `block`    | Boolean | `false` | Full-width button                                |
-| `circle`   | Boolean | `false` | Circle button (icon-only)                        |
-| `outlined` | Boolean | `false` | Outlined/ghost variant of the chosen color       |
-| `**options`| Hash    | `{}`    | Passed through as HTML attributes                |
+| Parameter  | Type    | Default    | Description                                                   |
+|------------|---------|------------|---------------------------------------------------------------|
+| `variant`  | Symbol  | `:default` | `default`, `outline`, `secondary`, `danger`, `ghost`, `link`  |
+| `url`      | String  | `nil`      | Renders an `<a>` tag when set                                 |
+| `size`     | Symbol  | `:md`      | `xs`, `sm`, `md`, `lg`, `icon_xs`, `icon_sm`, `icon_md`, `icon_lg` |
+| `rounded`  | Boolean | `false`    | Pill shape                                                    |
+| `block`    | Boolean | `false`    | Full-width button                                             |
+| `circle`   | Boolean | `false`    | Circle shape (icon-only)                                      |
+| `method`   | Symbol  | `nil`      | HTTP method for `button_to` (e.g. `:delete`)                  |
+| `**options`| Hash    | `{}`       | Passed through as HTML attributes                             |
 
 ---
 
-### CardComponent
+### Card
 
-A card container with optional header, body, and footer slots.
+A card container with standalone subcomponents for each section.
 
 ```erb
-<%# Card with all sections %>
-<%= render JetUi::CardComponent.new do |card| %>
-  <% card.with_header(title: "My Card", subtitle: "A description") %>
-  <% card.with_body do %>
+<%# Full card %>
+<%= jet_ui.card do %>
+  <%= jet_ui.card_header do %>
+    <%= jet_ui.card_title "My Card" %>
+    <%= jet_ui.card_subtitle "A description" %>
+  <% end %>
+  <%= jet_ui.card_body do %>
     Card body content.
   <% end %>
-  <% card.with_footer do %>
-    <%= render JetUi::BtnComponent.new(variant: :primary) { "Save" } %>
+  <%= jet_ui.card_footer justify: :end do %>
+    <%= jet_ui.btn variant: :outline do %>Cancel<% end %>
+    <%= jet_ui.btn { "Save" } %>
   <% end %>
 <% end %>
 
-<%# Minimal card (body only) %>
-<%= render JetUi::CardComponent.new do |card| %>
-  <% card.with_body { "Simple content." } %>
+<%# Header with row direction and space-between %>
+<%= jet_ui.card do %>
+  <%= jet_ui.card_header direction: :row, justify: :between do %>
+    <%= jet_ui.card_title "Users" %>
+    <%= jet_ui.btn size: :sm do %>Add user<% end %>
+  <% end %>
+  <%= jet_ui.card_body do %>...</% end %>
 <% end %>
 ```
+
+#### Card::Component
+
+| Parameter  | Type | Default | Description                   |
+|------------|------|---------|-------------------------------|
+| `**options`| Hash | `{}`    | HTML attributes on `.card` div |
 
 #### Card::HeaderComponent
 
-Rendered via `card.with_header(...)`.
-
-| Parameter  | Type    | Default | Description                                     |
-|------------|---------|---------|-------------------------------------------------|
-| `title`    | String  | `nil`   | Bold heading rendered as `<strong>`             |
-| `subtitle` | String  | `nil`   | Secondary text rendered as `<span>`             |
-| `align`    | Symbol  | `:left` | Alignment: :left, :center, :right               |
-| `bordered` | Boolean | `true`  | Shows a bottom border below the header          |
+| Parameter   | Type    | Default  | Description                                              |
+|-------------|---------|----------|----------------------------------------------------------|
+| `direction` | Symbol  | `:col`   | Flex direction: `:col`, `:row`                           |
+| `align`     | Symbol  | `:start` | Align items: `:start`, `:center`, `:end`                 |
+| `justify`   | Symbol  | `:start` | Justify content: `:start`, `:center`, `:end`, `:between` |
+| `bordered`  | Boolean | `true`   | Bottom border                                            |
 
 #### Card::FooterComponent
 
-Rendered via `card.with_footer(...)`.
+| Parameter   | Type    | Default  | Description                                              |
+|-------------|---------|----------|----------------------------------------------------------|
+| `direction` | Symbol  | `:row`   | Flex direction: `:col`, `:row`                           |
+| `align`     | Symbol  | `:start` | Align items: `:start`, `:center`, `:end`                 |
+| `justify`   | Symbol  | `:start` | Justify content: `:start`, `:center`, `:end`, `:between` |
+| `bordered`  | Boolean | `true`   | Top border                                               |
 
-| Parameter  | Type    | Default  | Description                                    |
-|------------|---------|----------|------------------------------------------------|
-| `align`    | Symbol  | `:right` | Alignment: :left, :center, :right              |
-| `bordered` | Boolean | `true`   | Shows a top border above the footer            |
+#### Card::BodyComponent / Card::TitleComponent / Card::SubtitleComponent
+
+Wrapper components with no required parameters — accept `**options` passed as HTML attributes.
 
 ---
 
-## Generators
+### Badge
 
-Copy a component's source files into your application for local customisation:
+A small label for status, categories, or counts.
 
-```bash
-rails generate jet_ui:btn
-rails generate jet_ui:card
+**Variants:** `default` (default), `info`, `success`, `warning`, `error`
+**Sizes:** `xs`, `sm` (default), `md`, `lg`
+
+```erb
+<%= jet_ui.badge { "New" } %>
+<%= jet_ui.badge variant: :success do %>Active<% end %>
+<%= jet_ui.badge variant: :error, size: :lg do %>Failed<% end %>
+<%= jet_ui.badge variant: :info, rounded: true do %>Beta<% end %>
 ```
 
-Each generator copies the Ruby component, ERB template (where applicable), CSS stylesheet, RSpec spec, and ViewComponent preview into your application.
+| Parameter  | Type    | Default    | Description                                         |
+|------------|---------|------------|-----------------------------------------------------|
+| `variant`  | Symbol  | `:default` | `default`, `info`, `success`, `warning`, `error`    |
+| `size`     | Symbol  | `:sm`      | `xs`, `sm`, `md`, `lg`                              |
+| `rounded`  | Boolean | `false`    | Pill shape                                          |
+| `**options`| Hash    | `{}`       | HTML attributes                                     |
+
+---
+
+### Alert
+
+A contextual message block with optional title, description, and icon.
+
+**Variants:** `default` (default), `info`, `success`, `warning`, `error`
+
+```erb
+<%# Simple alert %>
+<%= jet_ui.alert variant: :info do %>
+  <%= jet_ui.alert_title { "Heads up" } %>
+  <%= jet_ui.alert_description { "Your session expires in 5 minutes." } %>
+<% end %>
+
+<%# Alert with icon %>
+<%= jet_ui.alert variant: :success do %>
+  <%= jet_ui.alert_icon { "✓" } %>
+  <%= jet_ui.alert_description { "Changes saved successfully." } %>
+<% end %>
+```
+
+| Component              | Element  | Description                                 |
+|------------------------|----------|---------------------------------------------|
+| `jet_ui.alert`         | `div`    | Container — accepts `variant:` and `**options` |
+| `jet_ui.alert_title`   | `strong` | Bold heading                                |
+| `jet_ui.alert_description` | `div` | Body text — shifts right when icon present |
+| `jet_ui.alert_icon`    | `span`   | Icon slot — triggers two-column grid layout |
+
+---
+
+### Group
+
+Groups buttons together, collapsing their shared border into a single line.
+
+```erb
+<%# Sticky (merged borders) — default %>
+<%= jet_ui.group do %>
+  <%= jet_ui.btn variant: :outline do %>Day<% end %>
+  <%= jet_ui.btn variant: :outline do %>Week<% end %>
+  <%= jet_ui.btn variant: :outline do %>Month<% end %>
+<% end %>
+
+<%# Non-sticky (keeps gap between buttons) %>
+<%= jet_ui.group sticky: false do %>
+  <%= jet_ui.btn { "Save" } %>
+  <%= jet_ui.btn variant: :outline do %>Cancel<% end %>
+<% end %>
+```
+
+| Parameter  | Type    | Default | Description                             |
+|------------|---------|---------|-----------------------------------------|
+| `sticky`   | Boolean | `true`  | Merges adjacent button borders          |
+| `**options`| Hash    | `{}`    | HTML attributes                         |
+
+---
+
+### Stat
+
+A metric display card with label, value, and trend description.
+
+```erb
+<%= jet_ui.stat do %>
+  <%= jet_ui.stat_label { "Total Revenue" } %>
+  <%= jet_ui.stat_value { "$45,231" } %>
+  <%= jet_ui.stat_description variant: :success do %>+20% from last month<% end %>
+<% end %>
+```
+
+#### Stat::DescriptionComponent
+
+Renders a trend icon (SVG) automatically for non-default variants: up arrow for `success`, down arrow for `warning` and `error`.
+
+| Parameter  | Type   | Default    | Description                                      |
+|------------|--------|------------|--------------------------------------------------|
+| `variant`  | Symbol | `:default` | `default`, `success`, `warning`, `error`         |
+| `**options`| Hash   | `{}`       | HTML attributes                                  |
+
+---
+
+## Eject
+
+Copy a component's source into your application for local customisation:
+
+```bash
+rails generate jet_ui:eject btn
+rails generate jet_ui:eject card
+rails generate jet_ui:eject btn card
+```
+
+Ejected files land in `app/components/jet_ui/` and take precedence over the gem's versions automatically.
+
+---
 
 ## Development
 
 ```bash
 bundle install
-bundle exec rspec
+bundle exec ruby -Itest test/components/jet_ui/btn/component_test.rb
+# or run all tests
+bundle exec ruby -Itest -e "Dir['test/components/**/*_test.rb'].each { |f| require File.expand_path(f) }"
 ```
 
 ## License
