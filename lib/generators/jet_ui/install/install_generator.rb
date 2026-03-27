@@ -34,10 +34,12 @@ module JetUi
       def show_usage
         say "\nJetUi installed!\n", :green
         say "Usage in your views:"
-        say %(  <%= render JetUi::BtnComponent.new(variant: :primary) { "Save" } %>)
-        say %(  <%= render JetUi::CardComponent.new do |card| %>)
-        say %(       <% card.with_header(title: "Hello") %>)
-        say %(       <% card.with_body { "Content" } %>)
+        say %(  <%= jet_ui.btn variant: :default do %>Save<% end %>)
+        say %(  <%= jet_ui.card do %>)
+        say %(    <%= jet_ui.card_header do %>)
+        say %(      <%= jet_ui.card_title "Hello" %>)
+        say %(    <% end %>)
+        say %(    <%= jet_ui.card_body do %>Content<% end %>)
         say %(  <% end %>\n)
         say "To eject a component for local customization:"
         say "  rails generate jet_ui:eject btn"
@@ -60,17 +62,11 @@ module JetUi
       def gem_stylesheets_path
         spec = Gem::Specification.find_by_name("jet_ui") rescue nil
         base = spec&.gem_dir || File.expand_path("../../../../..", __dir__)
-        File.join(base, "app/assets/stylesheets/jet_ui")
+        File.join(base, "app/assets/stylesheets")
       end
 
       def tailwind_imports
-        path = gem_stylesheets_path
-        components = Dir[File.join(path, "*.css")]
-          .reject { |f| File.basename(f) == "theme.css" }
-          .map { |f| %(\n@import "#{f}";) }
-          .join
-
-        %(\n@import "#{File.join(path, "theme.css")}";) + components + "\n"
+        %(\n@import "#{File.join(gem_stylesheets_path, "jet_ui.css")}";\n)
       end
     end
   end

@@ -10,5 +10,11 @@ module JetUi
         app.config.view_component.preview_paths << root.join("test/components/previews").to_s
       end
     end
+
+    initializer "jet_ui.helpers" do
+      ActiveSupport.on_load(:action_view) do
+        include JetUiHelper
+      end
+    end
   end
 end

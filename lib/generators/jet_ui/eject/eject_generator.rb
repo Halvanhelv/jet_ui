@@ -23,21 +23,23 @@ module JetUi
       MANIFEST = {
         "btn" => {
           files: [
-            { src: "btn/btn_component.rb",          dest: "app/components/jet_ui/btn_component.rb" },
-            { src: "btn/btn.css",                   dest: "app/assets/stylesheets/jet_ui/btn.css" },
-            { src: "btn/btn_component_test.rb",     dest: "test/components/jet_ui/btn_component_test.rb" },
-            { src: "btn/btn_component_preview.rb",  dest: "test/components/previews/jet_ui/btn_component_preview.rb" }
+            { src: "btn/component.rb",         dest: "app/components/jet_ui/btn/component.rb" },
+            { src: "btn/btn.css",              dest: "app/assets/stylesheets/jet_ui/btn.css" },
+            { src: "btn/component_test.rb",    dest: "test/components/jet_ui/btn/component_test.rb" },
+            { src: "btn/component_preview.rb", dest: "test/components/previews/jet_ui/btn/component_preview.rb" }
           ]
         },
         "card" => {
           files: [
-            { src: "card/card_component.rb",              dest: "app/components/jet_ui/card_component.rb" },
-            { src: "card/card_component.html.erb",        dest: "app/components/jet_ui/card_component.html.erb" },
-            { src: "card/card/header_component.rb",       dest: "app/components/jet_ui/card/header_component.rb" },
-            { src: "card/card/footer_component.rb",       dest: "app/components/jet_ui/card/footer_component.rb" },
-            { src: "card/card.css",                       dest: "app/assets/stylesheets/jet_ui/card.css" },
-            { src: "card/card_component_test.rb",         dest: "test/components/jet_ui/card_component_test.rb" },
-            { src: "card/card_component_preview.rb",      dest: "test/components/previews/jet_ui/card_component_preview.rb" }
+            { src: "card/component.rb",         dest: "app/components/jet_ui/card/component.rb" },
+            { src: "card/header_component.rb",  dest: "app/components/jet_ui/card/header_component.rb" },
+            { src: "card/footer_component.rb",  dest: "app/components/jet_ui/card/footer_component.rb" },
+            { src: "card/body_component.rb",    dest: "app/components/jet_ui/card/body_component.rb" },
+            { src: "card/title_component.rb",   dest: "app/components/jet_ui/card/title_component.rb" },
+            { src: "card/subtitle_component.rb", dest: "app/components/jet_ui/card/subtitle_component.rb" },
+            { src: "card/card.css",             dest: "app/assets/stylesheets/jet_ui/card.css" },
+            { src: "card/component_test.rb",    dest: "test/components/jet_ui/card/component_test.rb" },
+            { src: "card/component_preview.rb", dest: "test/components/previews/jet_ui/card/component_preview.rb" }
           ]
         }
       }.freeze
