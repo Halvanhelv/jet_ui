@@ -11,7 +11,22 @@ module JetUi
     class InstallGenerator < Rails::Generators::Base
       source_root File.expand_path("templates", __dir__)
 
-      desc "Installs JetUi into your Rails application."
+      desc <<~DESC
+        Sets up JetUi in your Rails application.
+
+        Detects your Tailwind CSS source file and injects a single @import
+        that covers all JetUi component stylesheets. When the gem is updated
+        with new components, your app picks them up automatically on the next
+        CSS build — no manual changes needed.
+
+        Supported Tailwind source file locations:
+          app/assets/tailwind/application.css
+          app/assets/stylesheets/application.tailwind.css
+          app/assets/stylesheets/application.postcss.css
+
+        Example:
+          rails generate jet_ui:install
+      DESC
 
       def inject_css
         if (file = tailwind_source_file)
