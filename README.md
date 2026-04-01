@@ -269,6 +269,14 @@ rails generate jet_ui:eject btn card
 
 Ejected files land in `app/components/jet_ui/` and take precedence over the gem's versions automatically.
 
+By default both the test file and the ViewComponent preview are ejected alongside the component. Use the flags below to skip either:
+
+```bash
+rails generate jet_ui:eject btn --skip-test
+rails generate jet_ui:eject btn --skip-preview
+rails generate jet_ui:eject btn --skip-test --skip-preview
+```
+
 ---
 
 ## Development
