@@ -19,28 +19,28 @@ module JetUi
 
       def classes
         class_names(
-          "card__header",
+          'card__header',
           direction_class,
           align_class,
           justify_class,
-          { "card__header-bordered": @bordered },
+          { 'card__header-bordered': @bordered },
           @options.delete(:class)
         )
       end
 
       def direction_class
-        "card__header--row" if @direction == :row
+        'card__header--row' if @direction == :row
       end
 
       def align_class
-        { center: "card__header--align-center", end: "card__header--align-end" }[@align]
+        { center: 'card__header--align-center', end: 'card__header--align-end' }[@align]
       end
 
       def justify_class
         {
-          center:  "card__header--justify-center",
-          end:     "card__header--justify-end",
-          between: "card__header--justify-between"
+          center: 'card__header--justify-center',
+          end: 'card__header--justify-end',
+          between: 'card__header--justify-between'
         }[@justify]
       end
     end

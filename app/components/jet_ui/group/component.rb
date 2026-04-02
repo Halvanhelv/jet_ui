@@ -16,8 +16,8 @@ module JetUi
 
       def classes
         class_names(
-          "ui_group",
-          { "ui_group-sticky": @sticky },
+          'ui_group',
+          { 'ui_group-sticky': @sticky },
           @options.delete(:class)
         )
       end

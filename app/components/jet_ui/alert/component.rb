@@ -19,7 +19,7 @@ module JetUi
 
       def classes
         class_names(
-          "alert",
+          'alert',
           "alert-#{@variant}",
           @options.delete(:class)
         )

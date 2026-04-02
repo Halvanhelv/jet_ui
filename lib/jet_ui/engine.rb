@@ -2,17 +2,17 @@
 
 module JetUi
   class Engine < ::Rails::Engine
-    config.autoload_paths << root.join("app/components")
+    config.autoload_paths << root.join('app/components')
 
-    initializer "jet_ui.view_component" do |app|
+    initializer 'jet_ui.view_component' do |app|
       if app.config.respond_to?(:view_component)
         app.config.view_component.preview_paths ||= []
-        app.config.view_component.preview_paths << root.join("test/components/previews").to_s
+        app.config.view_component.preview_paths << root.join('test/components/previews').to_s
       end
     end
 
-    initializer "jet_ui.helpers" do
-      require root.join("app/helpers/jet_ui_helper").to_s
+    initializer 'jet_ui.helpers' do
+      require root.join('app/helpers/jet_ui_helper').to_s
       ActiveSupport.on_load(:action_view) do
         include JetUiHelper
       end

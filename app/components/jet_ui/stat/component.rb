@@ -14,7 +14,7 @@ module JetUi
       private
 
       def classes
-        class_names("stat", @options.delete(:class))
+        class_names('stat', @options.delete(:class))
       end
     end
   end

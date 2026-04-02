@@ -23,10 +23,10 @@ module JetUi
 
       def classes
         class_names(
-          "badge",
+          'badge',
           "badge-#{@variant}",
           "badge-#{@size}",
-          { "badge-rounded": @rounded },
+          { 'badge-rounded': @rounded },
           @options.delete(:class)
         )
       end

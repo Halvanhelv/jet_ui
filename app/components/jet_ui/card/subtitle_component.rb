@@ -15,7 +15,7 @@ module JetUi
 
       def classes
         class_names(
-          "card__subtitle",
+          'card__subtitle',
           @options.delete(:class)
         )
       end

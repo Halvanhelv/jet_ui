@@ -1,0 +1,92 @@
+plugins:
+  - rubocop-rails
+  - rubocop-minitest
+
+AllCops:
+  TargetRubyVersion: 3.0
+  NewCops: enable
+  SuggestExtensions: false
+  Exclude:
+    - "bin/**/*"
+    - "vendor/**/*"
+    - "gemfiles/**/*"
+    - "lib/generators/jet_ui/eject/templates/**/*"
+
+# Docs not required for a UI gem's internal components
+Style/Documentation:
+  Enabled: false
+
+# Frozen string literals are already enforced via the magic comment
+Style/FrozenStringLiteralComment:
+  Enabled: true
+  EnforcedStyle: always
+
+# Allow long lines in tests and generators where readability benefits
+Layout/LineLength:
+  Max: 120
+  Exclude:
+    - "test/**/*"
+    - "lib/generators/**/*"
+
+# Components define small focused classes — allow compact style
+Style/ClassAndModuleChildren:
+  Enabled: false
+
+# Allow rescue without explicit exception class in generators
+Style/RescueStandardError:
+  Enabled: false
+
+# Allow safe_constantize and similar Rails meta-programming patterns
+Rails/DynamicFindBy:
+  Enabled: false
+
+Minitest/MultipleAssertions:
+  Enabled: false
+
+# ViewComponent::Base#initialize does not require super
+Lint/MissingSuper:
+  Enabled: false
+
+# JetUiHelper and JetUi::Builder are intentionally in the same file
+Style/OneClassPerFile:
+  Enabled: false
+
+# Gemspec MFA not required for internal/early-stage gems
+Gemspec/RequireMFA:
+  Enabled: false
+
+# Dev dependencies are in gemspec intentionally (gem without Gemfile in CI)
+Gemspec/DevelopmentDependencies:
+  Enabled: false
+
+# Components expose all their options as keyword args — parameter count is by design
+Metrics/ParameterLists:
+  Enabled: false
+
+# Generator methods are necessarily complex — they orchestrate multi-step operations
+Metrics/MethodLength:
+  Exclude:
+    - "lib/generators/**/*"
+
+Metrics/AbcSize:
+  Exclude:
+    - "lib/generators/**/*"
+
+Metrics/CyclomaticComplexity:
+  Exclude:
+    - "lib/generators/**/*"
+
+Metrics/PerceivedComplexity:
+  Exclude:
+    - "lib/generators/**/*"
+
+# Generators legitimately use exit to abort on user error
+Rails/Exit:
+  Exclude:
+    - "lib/generators/**/*"
+
+# Test files naturally grow large — each method is a distinct assertion
+Metrics/ClassLength:
+  Exclude:
+    - "test/**/*"
+

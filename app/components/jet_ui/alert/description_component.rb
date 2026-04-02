@@ -14,7 +14,7 @@ module JetUi
       private
 
       def classes
-        class_names("alert__description", @options.delete(:class))
+        class_names('alert__description', @options.delete(:class))
       end
     end
   end

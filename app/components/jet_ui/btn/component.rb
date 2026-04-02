@@ -9,7 +9,8 @@ module JetUi
       VARIANTS = %i[default outline secondary danger ghost link].freeze
       DEFAULT_VARIANT = :default
 
-      def initialize(variant: DEFAULT_VARIANT, url: nil, size: DEFAULT_SIZE, rounded: false, block: false, circle: false, method: nil, **options)
+      def initialize(variant: DEFAULT_VARIANT, url: nil, size: DEFAULT_SIZE, rounded: false, block: false,
+                     circle: false, method: nil, **options)
         @variant = VARIANTS.include?(variant) ? variant : DEFAULT_VARIANT
         @url = url
         @size = SIZES.include?(size.to_sym) ? size.to_sym : DEFAULT_SIZE
@@ -28,7 +29,7 @@ module JetUi
         elsif @url
           link_to content, @url, class: classes, **@options
         else
-          button_tag content, type: "button", class: classes, **@options
+          button_tag content, type: 'button', class: classes, **@options
         end
       end
 
@@ -36,12 +37,12 @@ module JetUi
 
       def classes
         class_names(
-          "btn",
+          'btn',
           "btn-#{@variant}",
-          "btn-#{@size.to_s.tr("_", "-")}",
-          { "btn-block": @block },
-          { "btn-rounded": @rounded },
-          { "btn-circle": @circle },
+          "btn-#{@size.to_s.tr('_', '-')}",
+          { 'btn-block': @block },
+          { 'btn-rounded': @rounded },
+          { 'btn-circle': @circle },
           @options.delete(:class)
         )
       end
