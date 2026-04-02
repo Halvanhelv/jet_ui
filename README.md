@@ -91,7 +91,3 @@ bundle exec ruby -Itest test/components/jet_ui/btn/component_test.rb
 # Run all tests
 bundle exec ruby -Itest -e "Dir['test/components/**/*_test.rb'].each { |f| require File.expand_path(f) }"
 ```
-
-## License
-
-MIT

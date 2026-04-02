@@ -23,7 +23,7 @@ Gem::Specification.new do |spec|
     "lib/**/*",
     "app/**/*",
     "config/**/*",
-    "LICENSE",
+    "LICENSE.md",
     "README.md",
     "CHANGELOG.md"
   ]
