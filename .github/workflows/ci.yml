@@ -57,6 +57,10 @@ jobs:
             rails: "8.1"
           - ruby: "3.3"
             rails: "8.1"
+          - ruby: "3.4"
+            rails: "8.1"
+          - ruby: "4.0"
+            rails: "8.1"
 
     env:
       BUNDLE_GEMFILE: ${{ github.workspace }}/gemfiles/rails_${{ matrix.rails }}.gemfile
@@ -111,6 +115,24 @@ jobs:
 
       - name: Check for vulnerabilities
         run: bundle exec bundler-audit check
+
+  # ---------------------------------------------------------------------------
+  # Gemspec validation — ensure the gem builds cleanly
+  # ---------------------------------------------------------------------------
+  build:
+    name: gem build
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: "4.0"
+          bundler-cache: true
+
+      - name: Build gem
+        run: gem build jet_ui.gemspec
 
   # ---------------------------------------------------------------------------
   # Generators smoke test
