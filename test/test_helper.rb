@@ -23,4 +23,6 @@ require "jet_ui"
 
 TestApp.initialize!
 
+class ApplicationController < ActionController::Base; end
+
 require "minitest/autorun"
