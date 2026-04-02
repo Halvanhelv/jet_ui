@@ -12,6 +12,7 @@ module JetUi
     end
 
     initializer "jet_ui.helpers" do
+      require root.join("app/helpers/jet_ui_helper").to_s
       ActiveSupport.on_load(:action_view) do
         include JetUiHelper
       end
