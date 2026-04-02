@@ -81,13 +81,3 @@ rails generate jet_ui:eject btn --skip-test
 rails generate jet_ui:eject btn --skip-preview
 rails generate jet_ui:eject btn --skip-test --skip-preview
 ```
-
-## Development
-
-```bash
-bundle install
-# Run a single test file
-bundle exec ruby -Itest test/components/jet_ui/btn/component_test.rb
-# Run all tests
-bundle exec ruby -Itest -e "Dir['test/components/**/*_test.rb'].each { |f| require File.expand_path(f) }"
-```
