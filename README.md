@@ -5,7 +5,7 @@ ViewComponent-based UI library for Rails applications, matching the design syste
 ## Requirements
 
 - Ruby >= 3.0
-- Rails >= 6.1
+- Rails >= 7.0
 - [ViewComponent](https://viewcomponent.org) >= 3.0
 - Tailwind CSS v4 (configured in your host app)
 
