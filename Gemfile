@@ -10,5 +10,6 @@ gem 'sqlite3'
 group :development, :test do
   gem 'capybara'
   gem 'minitest'
+  gem 'pagy'
   gem 'simplecov', require: false
 end

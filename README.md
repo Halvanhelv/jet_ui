@@ -53,6 +53,18 @@ Subcomponents follow the `namespace_subcomponent` naming convention (`card_heade
 | Alert | [docs/components/alert.md](docs/components/alert.md) |
 | Group | [docs/components/group.md](docs/components/group.md) |
 | Stat | [docs/components/stat.md](docs/components/stat.md) |
+| Icon | [docs/components/icon.md](docs/components/icon.md) |
+| Spinner | [docs/components/spinner.md](docs/components/spinner.md) |
+| Avatar | [docs/components/avatar.md](docs/components/avatar.md) |
+| Breadcrumbs | [docs/components/breadcrumbs.md](docs/components/breadcrumbs.md) |
+| Tabs | [docs/components/tabs.md](docs/components/tabs.md) |
+| Empty | [docs/components/empty.md](docs/components/empty.md) |
+| List | [docs/components/list.md](docs/components/list.md) |
+| Divider | [docs/components/divider.md](docs/components/divider.md) |
+| Timeline | [docs/components/timeline.md](docs/components/timeline.md) |
+| Stepper | [docs/components/stepper.md](docs/components/stepper.md) |
+| Table | [docs/components/table.md](docs/components/table.md) |
+| Pagy | [docs/components/pagy.md](docs/components/pagy.md) |
 
 ## Generators
 
