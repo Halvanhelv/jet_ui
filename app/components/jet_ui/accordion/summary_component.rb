@@ -18,14 +18,11 @@ module JetUi
       private
 
       def classes
-        class_names(
-          'flex items-center justify-between gap-3 py-3.5 font-medium cursor-pointer',
-          @options[:class]
-        )
+        class_names('accordion__summary', @options[:class])
       end
 
       def icon_classes
-        'transition-transform size-4 group-open:-rotate-180'
+        'accordion__icon'
       end
     end
   end

@@ -6,7 +6,7 @@ class JetUi::Accordion::ComponentTest < ViewComponent::TestCase
   def test_renders_details_element
     render_inline(JetUi::Accordion::Component.new) { 'content' }
 
-    assert_selector 'details.group'
+    assert_selector 'details.accordion'
   end
 
   def test_closed_by_default
@@ -30,7 +30,7 @@ class JetUi::Accordion::ComponentTest < ViewComponent::TestCase
   def test_custom_class
     render_inline(JetUi::Accordion::Component.new(class: 'my-class')) { 'content' }
 
-    assert_selector 'details.group.my-class'
+    assert_selector 'details.accordion.my-class'
   end
 
   def test_summary_renders_summary_tag

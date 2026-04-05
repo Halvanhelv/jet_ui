@@ -14,7 +14,7 @@ module JetUi
       private
 
       def classes
-        class_names('pb-3.5', @options[:class])
+        class_names('accordion__body', @options[:class])
       end
     end
   end

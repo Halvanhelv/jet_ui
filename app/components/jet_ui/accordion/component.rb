@@ -17,7 +17,7 @@ module JetUi
       private
 
       def classes
-        class_names('group', @options[:class])
+        class_names('accordion', @options[:class])
       end
     end
   end
