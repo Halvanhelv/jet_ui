@@ -1,7 +1,7 @@
 # JetUi
 
 [![Gem Version](https://img.shields.io/gem/v/jet_ui)](https://rubygems.org/gems/jet_ui)
-[![Checks](https://img.shields.io/github/actions/workflow/status/jetrockets/jet_ui/ci.yml?label=checks)](https://github.com/jetrockets/jet_ui/actions/workflows/ci.yml)
+[![Checks](https://img.shields.io/github/actions/workflow/status/jetrockets/jet_ui/ci.yml?label=checks&logo=github)](https://github.com/jetrockets/jet_ui/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue)](LICENSE.md)
 [![Downloads](https://img.shields.io/gem/dt/jet_ui)](https://rubygems.org/gems/jet_ui)
 [![Ruby](https://img.shields.io/badge/ruby-%3E%3D%203.0-CC342D)](https://rubygems.org/gems/jet_ui)
