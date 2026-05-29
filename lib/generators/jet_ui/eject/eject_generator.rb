@@ -9,35 +9,6 @@ module JetUi
         [File.expand_path('../../../..', __dir__)]
       end
 
-      desc <<~DESC
-        Copies one or more JetUi component source files into your application
-        so they can be customised locally. Ejected files take precedence over
-        the gem's built-in versions automatically — no extra configuration needed.
-
-        Available components: #{%w[accordion btn card clipboard divider drawer dropdown empty flash header icon list modal navbar pagy popover sidebar spinner stat stepper table tabs timeline tooltip turbo_confirm].join(', ')}
-
-        Examples:
-          rails generate jet_ui:eject btn
-          rails generate jet_ui:eject flash
-          rails generate jet_ui:eject modal drawer
-          rails generate jet_ui:eject btn --skip-test
-          rails generate jet_ui:eject btn --skip-preview
-          rails generate jet_ui:eject flash --skip-javascript
-          rails generate jet_ui:eject btn --skip-test --skip-preview
-      DESC
-
-      argument :components, type: :array, banner: 'component [component ...]',
-                            desc: 'One or more component names to eject (e.g. btn card)'
-
-      class_option :skip_test, type: :boolean, default: false,
-                               desc: 'Skip ejecting the component test file'
-
-      class_option :skip_preview, type: :boolean, default: false,
-                                  desc: 'Skip ejecting the ViewComponent preview file'
-
-      class_option :skip_javascript, type: :boolean, default: false,
-                                     desc: 'Skip ejecting the Stimulus controller JS file (for components that have one)'
-
       MANIFEST = {
         'btn' => {
           files: [
@@ -338,11 +309,41 @@ module JetUi
         }
       }.freeze
 
+      desc <<~DESC
+        Copies one or more JetUi component source files into your application
+        so they can be customised locally. Ejected files take precedence over
+        the gem's built-in versions automatically — no extra configuration needed.
+
+        Available components (#{MANIFEST.size}):
+        #{MANIFEST.keys.sort.join(', ')}
+
+        Examples:
+          rails generate jet_ui:eject btn
+          rails generate jet_ui:eject flash
+          rails generate jet_ui:eject modal drawer
+          rails generate jet_ui:eject btn --skip-test
+          rails generate jet_ui:eject btn --skip-preview
+          rails generate jet_ui:eject flash --skip-javascript
+          rails generate jet_ui:eject btn --skip-test --skip-preview
+      DESC
+
+      argument :components, type: :array, banner: 'component [component ...]',
+                            desc: 'One or more component names to eject (e.g. btn card)'
+
+      class_option :skip_test, type: :boolean, default: false,
+                               desc: 'Skip ejecting the component test file'
+
+      class_option :skip_preview, type: :boolean, default: false,
+                                  desc: 'Skip ejecting the ViewComponent preview file'
+
+      class_option :skip_javascript, type: :boolean, default: false,
+                                     desc: 'Skip ejecting the Stimulus controller JS file (for components that have one)'
+
       def eject_components
         unknown = components.map(&:downcase) - MANIFEST.keys
         if unknown.any?
           say "\nUnknown component(s): #{unknown.join(', ')}", :red
-          say "Available: #{MANIFEST.keys.join(', ')}\n", :red
+          say "Available: #{MANIFEST.keys.join(', ')}", :red
           exit 1
         end
 

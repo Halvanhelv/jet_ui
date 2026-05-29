@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'rails/generators'
+require_relative '../eject/eject_generator'
 
 module JetUi
   module Generators
@@ -12,7 +13,11 @@ module JetUi
       source_root File.expand_path('templates', __dir__)
 
       desc <<~DESC
-        Sets up JetUi in your Rails application.
+        JetUi is a ViewComponent-based UI library for Rails — #{EjectGenerator::MANIFEST.size} ready-made
+        components styled with Tailwind CSS v4, matching the design system at
+        ui.jetrockets.com.
+
+        This generator sets up JetUi in your Rails application:
 
         1. CSS — Detects your Tailwind source file and injects a single @import
            that covers all JetUi component stylesheets. New components added in
@@ -20,8 +25,7 @@ module JetUi
 
         2. JS — Adds eagerLoadControllersFrom("jet_ui", application) to your
            Stimulus controllers index. All current and future JetUi Stimulus
-           controllers (flash, modal, etc.) are registered automatically when
-           you update the gem — no further changes needed.
+           controllers are registered automatically when you update the gem.
 
         Safe to run multiple times — already-configured steps are skipped.
 
@@ -29,6 +33,9 @@ module JetUi
           app/assets/tailwind/application.css
           app/assets/stylesheets/application.tailwind.css
           app/assets/stylesheets/application.postcss.css
+
+        To see all available components with descriptions:
+          rails generate jet_ui:eject --help
 
         Example:
           rails generate jet_ui:install
