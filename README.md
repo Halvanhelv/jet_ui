@@ -37,6 +37,30 @@ The generator:
 
 When the gem is updated, both CSS and JS are picked up automatically — no further changes needed. Safe to re-run after upgrades.
 
+### Alternative: npm package (Vite)
+
+The above (importmap) setup needs no npm install — the gem ships the controllers itself. If your app bundles JavaScript with Vite instead, the Stimulus controllers are also available as an npm package:
+
+<!-- TODO: published under @islam_gagiev_101/jet-ui for now (verification); switch all references below to @jetrockets/jet-ui once published under the jetrockets npm org. -->
+
+```bash
+yarn add @islam_gagiev_101/jet-ui
+```
+
+```javascript
+import { ModalController } from "@islam_gagiev_101/jet-ui"
+
+application.register("modal", ModalController)
+```
+
+Import the component styles in your Tailwind/CSS entry point:
+
+```css
+@import "@islam_gagiev_101/jet-ui/css";
+```
+
+`rails generate jet_ui:install` detects a Vite app and prints these same steps.
+
 ## Usage
 
 The `jet_ui` helper is available in all views:
