@@ -7,6 +7,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.2.7] - 2026-05-29
+
+### Added
+- Generator tests for `jet_ui:eject` and `jet_ui:install`
+
+### Changed
+- `jet_ui:eject --help` now lists all available components derived directly from `MANIFEST` — always accurate, never stale
+- `jet_ui:install --help` updated with gem overview and pointer to `jet_ui:eject --help`
+- Upgrade development Ruby version to 4.0.5
+
+### Removed
+- Stale `USAGE` files for `eject` and `install` generators — superseded by the class-level `desc`
+
 ## [0.2.6] - 2026-05-13
 
 ### Changed
